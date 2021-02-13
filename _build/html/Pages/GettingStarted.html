@@ -1,0 +1,557 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Getting Started &mdash; Neutron 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Welcome Neutron Fremework" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Neutron
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Neutron Framework</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-the-server">Configuring the server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-the-client">Configuring the client</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configuring-the-connection">Configuring the connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matchmaking">Matchmaking</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Neutron</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Getting Started</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/Pages/GettingStarted.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p>Hi (:</p>
+<p>Neutron Unity Networking is a Unity package for multiplayer games.
+Flexible matchmaking gets your players into rooms, channels and groups where objects can be synced over the network.</p>
+<p><strong>Communication Types:</strong></p>
+<dl class="field-list">
+<dt class="field-odd">RPC</dt>
+<dd class="field-odd"><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Remote</span> <span class="pre">Procedure</span> <span class="pre">Calls</span> <span class="pre">are</span> <span class="pre">exactly</span> <span class="pre">what</span> <span class="pre">the</span> <span class="pre">name</span> <span class="pre">implies:</span> <span class="pre">method-calls</span> <span class="pre">on</span> <span class="pre">remote</span> <span class="pre">clients</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">same</span> <span class="pre">local</span> <span class="pre">by</span> <span class="pre">broadcast.</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">To</span> <span class="pre">enable</span> <span class="pre">remote</span> <span class="pre">calling</span> <span class="pre">for</span> <span class="pre">some</span> <span class="pre">method,</span> <span class="pre">you</span> <span class="pre">must</span> <span class="pre">apply</span> <span class="pre">the</span> <span class="pre">attribute.[RPC]</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">RPC</span> <span class="pre">are</span> <span class="pre">sent</span> <span class="pre">from</span> <span class="pre">the</span> <span class="pre">client</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">server.</span></code></div>
+</div>
+</dd>
+<dt class="field-even">APC</dt>
+<dd class="field-even"><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">One</span> <span class="pre">feature</span> <span class="pre">that</span> <span class="pre">sets</span> <span class="pre">Neutron</span> <span class="pre">aside</span> <span class="pre">from</span> <span class="pre">other</span> <span class="pre">Network</span> <span class="pre">packages</span> <span class="pre">is</span> <span class="pre">the</span> <span class="pre">support</span> <span class="pre">for</span> <span class="pre">&quot;Authoritative</span> <span class="pre">Procedure</span> <span class="pre">Calls&quot;</span> <span class="pre">(APCs).</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Is</span> <span class="pre">basically</span> <span class="pre">the</span> <span class="pre">same</span> <span class="pre">as</span> <span class="pre">RPC,</span> <span class="pre">except</span> <span class="pre">that:</span> <span class="pre">APC</span> <span class="pre">are</span> <span class="pre">sent</span> <span class="pre">from</span> <span class="pre">the</span> <span class="pre">server</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">client.</span></code></div>
+</div>
+</dd>
+<dt class="field-odd">RCC</dt>
+<dd class="field-odd"><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">One</span> <span class="pre">feature</span> <span class="pre">that</span> <span class="pre">sets</span> <span class="pre">Neutron</span> <span class="pre">aside</span> <span class="pre">from</span> <span class="pre">other</span> <span class="pre">Network</span> <span class="pre">packages</span> <span class="pre">is</span> <span class="pre">the</span> <span class="pre">support</span> <span class="pre">for</span> <span class="pre">&quot;Remote</span> <span class="pre">Creation</span> <span class="pre">Calls&quot;</span> <span class="pre">(RCCs).</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">These</span> <span class="pre">calls</span> <span class="pre">are</span> <span class="pre">global</span> <span class="pre">server</span> <span class="pre">events</span> <span class="pre">for</span> <span class="pre">clients,</span> <span class="pre">mainly</span> <span class="pre">used</span> <span class="pre">for</span> <span class="pre">the</span> <span class="pre">creation</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">player.</span></code></div>
+</div>
+</dd>
+<dt class="field-even">ACC</dt>
+<dd class="field-even"><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">One</span> <span class="pre">feature</span> <span class="pre">that</span> <span class="pre">sets</span> <span class="pre">Neutron</span> <span class="pre">aside</span> <span class="pre">from</span> <span class="pre">other</span> <span class="pre">Network</span> <span class="pre">packages</span> <span class="pre">is</span> <span class="pre">the</span> <span class="pre">support</span> <span class="pre">for</span> <span class="pre">&quot;Authoritative</span> <span class="pre">Creation</span> <span class="pre">Calls&quot;</span> <span class="pre">(ACCs).</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Is</span> <span class="pre">basically</span> <span class="pre">the</span> <span class="pre">same</span> <span class="pre">as</span> <span class="pre">RCC,</span> <span class="pre">except</span> <span class="pre">that:</span> <span class="pre">ACC</span> <span class="pre">are</span> <span class="pre">sent</span> <span class="pre">from</span> <span class="pre">the</span> <span class="pre">server</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">client.</span></code></div>
+</div>
+</dd>
+</dl>
+<p>Neutron was created with the aim of serving all games,
+from FPS to MMORPG and even simpler games, whatever you want.</p>
+<div class="section" id="configuring-the-server">
+<h2>Configuring the server<a class="headerlink" href="#configuring-the-server" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Download package from the GitHub repository.</p></li>
+<li><p>Put in the Unity assets folder.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Now let’s create two layers necessary for the server to work, create the layer “ServerObject” and “ClientObject”</p>
+</div>
+<p>Now that we’ve finished the basics, let’s get started.</p>
+<ul class="simple">
+<li><p>Create an object like the one in the image.</p></li>
+</ul>
+<img alt="../_images/ServerController.png" class="img" src="../_images/ServerController.png" />
+<ul class="simple">
+<li><p>Create the Object “Server Controller”.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The name of the object doesn’t matter</p>
+</div>
+<ul class="simple">
+<li><p>Put the script “Neutron Server” in the object was created.</p></li>
+<li><p>The server is ready.</p></li>
+</ul>
+<p><strong>Parameters:</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Time Delta</dt>
+<dd class="field-odd"><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">completion</span> <span class="pre">time</span> <span class="pre">in</span> <span class="pre">seconds</span> <span class="pre">since</span> <span class="pre">the</span> <span class="pre">last</span> <span class="pre">frame.</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">This</span> <span class="pre">property</span> <span class="pre">provides</span> <span class="pre">the</span> <span class="pre">time</span> <span class="pre">between</span> <span class="pre">the</span> <span class="pre">current</span> <span class="pre">and</span> <span class="pre">previous</span> <span class="pre">frame.</span></code></div>
+</div>
+</dd>
+<dt class="field-even">Channels</dt>
+<dd class="field-even"><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">server</span> <span class="pre">channels</span> <span class="pre">here.</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Internal</span> <span class="pre">ID:</span> <span class="pre">The</span> <span class="pre">value</span> <span class="pre">of</span> <span class="pre">this</span> <span class="pre">field</span> <span class="pre">must</span> <span class="pre">be</span> <span class="pre">unique.</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Name:</span> <span class="pre">The</span> <span class="pre">Channel</span> <span class="pre">Name.</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count(ReadOnly):</span> <span class="pre">The</span> <span class="pre">number</span> <span class="pre">of</span> <span class="pre">players</span> <span class="pre">in</span> <span class="pre">this</span> <span class="pre">channel.</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Max</span> <span class="pre">Players:</span> <span class="pre">The</span> <span class="pre">maximum</span> <span class="pre">number</span> <span class="pre">of</span> <span class="pre">players</span> <span class="pre">on</span> <span class="pre">this</span> <span class="pre">channel.</span></code></div>
+</div>
+</dd>
+<dt class="field-odd">Buffers</dt>
+<dd class="field-odd"><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Coming</span> <span class="pre">soon....</span></code></div>
+</div>
+</dd>
+<dt class="field-even">Rooms</dt>
+<dd class="field-even"><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Rooms</span> <span class="pre">automatically</span> <span class="pre">created</span> <span class="pre">by</span> <span class="pre">the</span> <span class="pre">server.</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">rooms</span> <span class="pre">can</span> <span class="pre">also</span> <span class="pre">be</span> <span class="pre">created</span> <span class="pre">by</span> <span class="pre">the</span> <span class="pre">clients,</span> <span class="pre">except</span> <span class="pre">the</span> <span class="pre">channels.</span></code></div>
+</div>
+</dd>
+</dl>
+<img alt="../_images/ServerConfig.png" class="img" src="../_images/ServerConfig.png" />
+<dl class="field-list simple">
+<dt class="field-odd">Compression Mode</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">type</span> <span class="pre">of</span> <span class="pre">data</span> <span class="pre">compression</span> <span class="pre">that</span> <span class="pre">will</span> <span class="pre">be</span> <span class="pre">used,</span> <span class="pre">the</span> <span class="pre">default</span> <span class="pre">is</span> <span class="pre">DEFLATE.</span></code></p>
+</dd>
+<dt class="field-even">Server Port</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">port</span> <span class="pre">on</span> <span class="pre">which</span> <span class="pre">the</span> <span class="pre">server</span> <span class="pre">listens</span> <span class="pre">for</span> <span class="pre">data.</span></code></p>
+</dd>
+<dt class="field-odd">Voice Port</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">port</span> <span class="pre">on</span> <span class="pre">which</span> <span class="pre">the</span> <span class="pre">voice</span> <span class="pre">server</span> <span class="pre">listens</span> <span class="pre">for</span> <span class="pre">voice</span> <span class="pre">data.</span></code></p>
+</dd>
+<dt class="field-even">BackLog</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">maximum</span> <span class="pre">length</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">pending</span> <span class="pre">connections</span> <span class="pre">queue</span></code></p>
+</dd>
+<dt class="field-odd">FPS</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">Frame</span> <span class="pre">rate</span> <span class="pre">of</span> <span class="pre">Server.</span></code></p>
+</dd>
+<dt class="field-even">DPF</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">Amount</span> <span class="pre">of</span> <span class="pre">queue</span> <span class="pre">data</span> <span class="pre">processed</span> <span class="pre">per</span> <span class="pre">frame.</span></code></p>
+</dd>
+<dt class="field-odd">Send Rate</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">Delay</span> <span class="pre">between</span> <span class="pre">sending</span> <span class="pre">each</span> <span class="pre">packet,</span> <span class="pre">0</span> <span class="pre">will</span> <span class="pre">overload</span> <span class="pre">the</span> <span class="pre">CPU.</span></code></p>
+</dd>
+<dt class="field-even">Quick Packets</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">Enables</span> <span class="pre">fast</span> <span class="pre">processing</span> <span class="pre">of</span> <span class="pre">TCP</span> <span class="pre">packets,</span> <span class="pre">note:</span> <span class="pre">if</span> <span class="pre">enabled,</span> <span class="pre">packets</span> <span class="pre">sent</span> <span class="pre">too</span> <span class="pre">often</span> <span class="pre">may</span> <span class="pre">fail.</span></code></p>
+</dd>
+<dt class="field-odd">No Delay</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">Gets</span> <span class="pre">or</span> <span class="pre">sets</span> <span class="pre">a</span> <span class="pre">value</span> <span class="pre">that</span> <span class="pre">disables</span> <span class="pre">a</span> <span class="pre">delay</span> <span class="pre">when</span> <span class="pre">send</span> <span class="pre">or</span> <span class="pre">receive</span> <span class="pre">buffers</span> <span class="pre">are</span> <span class="pre">not</span> <span class="pre">full.</span></code></p>
+</dd>
+<dt class="field-even">Anti-Cheat</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">Activate</span> <span class="pre">or</span> <span class="pre">deactivate</span> <span class="pre">the</span> <span class="pre">server's</span> <span class="pre">anti-cheat.</span></code></p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>AntiCheat leave it disabled if you use authority.</p>
+</div>
+<dl class="field-list">
+<dt class="field-odd">Teleport Tolerance</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">Maximum</span> <span class="pre">teleport</span> <span class="pre">distance</span> <span class="pre">to</span> <span class="pre">detect</span> <span class="pre">the</span> <span class="pre">player.</span></code></p>
+</dd>
+<dt class="field-even">SpeedHack Tolerance</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">Frequency</span> <span class="pre">with</span> <span class="pre">which</span> <span class="pre">packets</span> <span class="pre">arrive</span> <span class="pre">at</span> <span class="pre">the</span> <span class="pre">server</span> <span class="pre">per</span> <span class="pre">second.</span></code></p>
+</dd>
+<dt class="field-odd">URI Login</dt>
+<dd class="field-odd"><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Activate</span> <span class="pre">your</span> <span class="pre">local</span> <span class="pre">network,</span> <span class="pre">ex:</span> <span class="pre">”Xampp“,</span> <span class="pre">and</span> <span class="pre">inside</span> <span class="pre">the</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">&quot;htdocs&quot;</span> <span class="pre">folder</span> <span class="pre">create</span> <span class="pre">the</span> <span class="pre">Network</span> <span class="pre">folder</span> <span class="pre">and</span> <span class="pre">put</span> <span class="pre">the</span> <span class="pre">&quot;login.php&quot;</span> <span class="pre">script.</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">login</span> <span class="pre">script</span> <span class="pre">as</span> <span class="pre">example</span> <span class="pre">and</span> <span class="pre">find</span> <span class="pre">on</span> <span class="pre">GitHub.</span></code></div>
+</div>
+</dd>
+<dt class="field-even">Time Delta</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">&quot;time.DeltaTime&quot;</span> <span class="pre">of</span> <span class="pre">server,</span> <span class="pre">is</span> <span class="pre">ReadOnly.</span></code></p>
+</dd>
+<dt class="field-odd">Channels</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">server's</span> <span class="pre">pre-existing</span> <span class="pre">channels.</span></code></p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ignore the tolerance if you do not use Anti-Cheat enabled, if you use authority, ignore this too. More if you use RPC to synchronize movements, do not ignore this.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<div class="line-block">
+<div class="line">Speed Tolerance: The calculation is: <strong>n * 1000 = result; -&gt; 1000 / result = final result;</strong></div>
+<div class="line"><strong>eg: 0.1 * 1000 = 100 -&gt; 1000/100 = 10;</strong></div>
+<div class="line">In other words, if you synchronize the movement via RPC every 0.1 second or 100 milliseconds, your speedhack tolerance will be 10.</div>
+</div>
+</div>
+</div>
+<div class="section" id="configuring-the-client">
+<h2>Configuring the client<a class="headerlink" href="#configuring-the-client" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Create de object “ClientController”</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The name of the object doesn’t matter</p>
+</div>
+<ul class="simple">
+<li><p>Create the connection script and put in object was created.</p></li>
+<li><p>put too “Neutron Physics Ignore”.</p></li>
+</ul>
+<img alt="../_images/ClientController.png" src="../_images/ClientController.png" />
+<ul class="simple">
+<li><p>Ready :D</p></li>
+</ul>
+<div class="section" id="configuring-the-connection">
+<h3>Configuring the connection<a class="headerlink" href="#configuring-the-connection" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>First we need to create a Neutron instance.</p></li>
+</ul>
+<div class="highlight-C# notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">void</span> <span class="nf">Start</span><span class="p">()</span> <span class="p">{</span>
+   <span class="kt">var</span> <span class="n">clientInstance</span> <span class="p">=</span> <span class="n">Neutron</span><span class="p">.</span><span class="n">CreateClient</span><span class="p">(</span><span class="n">ClientType</span><span class="p">.</span><span class="n">MainPlayer</span><span class="p">);</span> <span class="c1">// this instance can be accessed by **Neutron.Client**</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The main instance (MainPlayer), “clientInstance” that you will see below can be accessed from other scripts through “Neutron.Client”</p>
+</div>
+<ul class="simple">
+<li><p>Now let’s record the events.</p></li>
+</ul>
+<div class="highlight-C# notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">void</span> <span class="nf">Start</span><span class="p">()</span> <span class="p">{</span>
+   <span class="kt">var</span> <span class="n">clientInstance</span> <span class="p">=</span> <span class="n">Neutron</span><span class="p">.</span><span class="n">CreateClient</span><span class="p">(</span><span class="n">ClientType</span><span class="p">.</span><span class="n">MainPlayer</span><span class="p">);</span> <span class="c1">// this instance can be accessed by **Neutron.Client**</span>
+
+   <span class="c1">//events</span>
+
+<span class="hll">   <span class="n">clientInstance</span><span class="p">.</span><span class="n">onNeutronConnected</span> <span class="p">+=</span> <span class="n">OnNeutronConnected</span><span class="p">;</span> <span class="c1">// registered method.</span>
+</span>   <span class="n">clientInstance</span><span class="p">.</span><span class="n">Connect</span><span class="p">(</span><span class="s">&quot;localhost&quot;</span><span class="p">,</span> <span class="m">5055</span><span class="p">);</span> <span class="c1">// IP And Port to connect.</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li><p>Registered method.</p></li>
+</ul>
+<div class="highlight-C# notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">void</span> <span class="nf">OnNeutronConnected</span><span class="p">(</span><span class="kt">bool</span> <span class="n">success</span><span class="p">,</span> <span class="n">Neutron</span> <span class="n">localInstance</span><span class="p">)</span> <span class="p">{</span>
+   <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&quot;ready&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li><p>Ready, connection established.</p></li>
+</ul>
+</div>
+<div class="section" id="matchmaking">
+<h3>Matchmaking<a class="headerlink" href="#matchmaking" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Set the your nickname, First let’s record the nickname change event.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The nickname can be changed by both the client and the server. You can remove the client’s permission to change the nickname on the server.</p>
+</div>
+<div class="highlight-C# notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">void</span> <span class="nf">Start</span><span class="p">()</span> <span class="p">{</span>
+   <span class="kt">var</span> <span class="n">clientInstance</span> <span class="p">=</span> <span class="n">Neutron</span><span class="p">.</span><span class="n">CreateClient</span><span class="p">(</span><span class="n">ClientType</span><span class="p">.</span><span class="n">MainPlayer</span><span class="p">);</span> <span class="c1">// this instance can be accessed by **Neutron.Client**</span>
+
+   <span class="c1">//events</span>
+
+   <span class="n">clientInstance</span><span class="p">.</span><span class="n">onNeutronConnected</span> <span class="p">+=</span> <span class="n">OnNeutronConnected</span><span class="p">;</span> <span class="c1">// registered method.</span>
+<span class="hll">   <span class="n">clientInstance</span><span class="p">.</span><span class="n">onNicknameChanged</span> <span class="p">+=</span> <span class="n">OnNickname</span><span class="p">;</span> <span class="c1">// nickname event.</span>
+</span>   <span class="n">clientInstance</span><span class="p">.</span><span class="n">Connect</span><span class="p">(</span><span class="s">&quot;localhost&quot;</span><span class="p">,</span> <span class="m">5055</span><span class="p">);</span> <span class="c1">// IP And Port to connect.</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li><p>Registered method.</p></li>
+</ul>
+<div class="highlight-C# notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">void</span> <span class="nf">OnNickname</span><span class="p">(</span><span class="n">Neutron</span> <span class="n">instance</span><span class="p">)</span> <span class="p">{</span>
+   <span class="c1">// Nickname has changed.</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Create Room and Join Room/Channel:</strong></p>
+<ul class="simple">
+<li><p>We will record the events.</p></li>
+</ul>
+<div class="highlight-C# notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">void</span> <span class="nf">Start</span><span class="p">()</span> <span class="p">{</span>
+   <span class="kt">var</span> <span class="n">clientInstance</span> <span class="p">=</span> <span class="n">Neutron</span><span class="p">.</span><span class="n">CreateClient</span><span class="p">(</span><span class="n">ClientType</span><span class="p">.</span><span class="n">MainPlayer</span><span class="p">);</span> <span class="c1">// this instance can be accessed by **Neutron.Client**</span>
+
+   <span class="c1">//events</span>
+
+   <span class="n">clientInstance</span><span class="p">.</span><span class="n">onNeutronConnected</span> <span class="p">+=</span> <span class="n">OnNeutronConnected</span><span class="p">;</span> <span class="c1">// registered method.</span>
+   <span class="n">clientInstance</span><span class="p">.</span><span class="n">onNicknameChanged</span> <span class="p">+=</span> <span class="n">OnNickname</span><span class="p">;</span> <span class="c1">// nickname event.</span>
+<span class="hll">   <span class="n">clientInstance</span><span class="p">.</span><span class="n">onPlayerJoinedChannel</span> <span class="p">+=</span> <span class="n">OnJoinedChannel</span><span class="p">;</span>
+</span><span class="hll">   <span class="n">clientInstance</span><span class="p">.</span><span class="n">onPlayerJoinedRoom</span> <span class="p">+=</span> <span class="n">OnJoinedRoom</span><span class="p">;</span>
+</span><span class="hll">   <span class="n">clientInstance</span><span class="p">.</span><span class="n">onCreatedRoom</span> <span class="p">+=</span> <span class="n">OnCreatedRoom</span><span class="p">;</span>
+</span>   <span class="n">clientInstance</span><span class="p">.</span><span class="n">Connect</span><span class="p">(</span><span class="s">&quot;localhost&quot;</span><span class="p">,</span> <span class="m">5055</span><span class="p">);</span> <span class="c1">// IP And Port to connect.</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li><p>Registered methods.</p></li>
+</ul>
+<div class="highlight-C# notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">void</span> <span class="nf">OnCreatedRoom</span><span class="p">(</span><span class="n">Room</span> <span class="n">room</span><span class="p">,</span> <span class="n">NeutronReader</span> <span class="n">options</span><span class="p">,</span> <span class="n">Neutron</span> <span class="n">localInstance</span><span class="p">)</span> <span class="p">{</span>
+   <span class="c1">//Created</span>
+<span class="p">}</span>
+
+<span class="k">void</span> <span class="nf">OnJoinedRoom</span><span class="p">(</span><span class="n">Player</span> <span class="n">player</span><span class="p">,</span> <span class="kt">int</span> <span class="n">id</span><span class="p">,</span> <span class="n">Neutron</span> <span class="n">instance</span><span class="p">)</span> <span class="p">{</span>
+   <span class="c1">// Joined</span>
+<span class="p">}</span>
+
+<span class="k">void</span> <span class="nf">OnJoinedChannel</span><span class="p">(</span><span class="n">Player</span> <span class="n">player</span><span class="p">,</span> <span class="n">Neutron</span> <span class="n">instance</span><span class="p">)</span> <span class="p">{</span>
+   <span class="c1">// Joined</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>eg:</p>
+<div class="highlight-C# notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">void</span> <span class="nf">OnNickname</span><span class="p">(</span><span class="n">Neutron</span> <span class="n">instance</span><span class="p">)</span> <span class="p">{</span>
+   <span class="n">instance</span><span class="p">.</span><span class="n">JoinChannel</span><span class="p">(</span><span class="m">0</span><span class="p">);</span> <span class="c1">// join to a channel 0. if a channel not exist in server, an error message will be displayed.</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li><p>Creating a room</p></li>
+</ul>
+<div class="highlight-C# notranslate"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">void</span> <span class="nf">CreateRoom</span><span class="p">()</span> <span class="p">{</span>
+     <span class="n">Neutron</span><span class="p">.</span><span class="n">Client</span><span class="p">.</span><span class="n">CreateRoom</span><span class="p">(</span><span class="s">&quot;room name&quot;</span><span class="p">,</span> <span class="m">100</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="k">new</span> <span class="n">NeutronWriter</span><span class="p">());</span>
+
+     <span class="c1">// or instance.CreateRoom(&quot;room name&quot;, 100, null, new NeutronWriter());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome Neutron Fremework" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Ruan Cardoso
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,248 +1,129 @@
 ===================
-Getting Started
+Começando
 ===================
 
-Hi (:
+**Instalação**
 
-Neutron Unity Networking is a Unity package for multiplayer games.
-Flexible matchmaking gets your players into rooms, channels and groups where objects can be synced over the network.
-
-**Communication Types:**
-
-:RPC: | ``Remote Procedure Calls are exactly what the name implies: method-calls on remote clients in the same local by broadcast.``
-      | ``To enable remote calling for some method, you must apply the attribute.[RPC]``
-      | ``RPC are sent from the client to the server.``
-
-:APC: | ``One feature that sets Neutron aside from other Network packages is the support for "Authoritative Procedure Calls" (APCs).``
-      | ``Is basically the same as RPC, except that: APC are sent from the server to the client.``
-
-:RCC: | ``One feature that sets Neutron aside from other Network packages is the support for "Remote Creation Calls" (RCCs).``
-      | ``These calls are global server events for clients, mainly used for the creation of the player.``
-
-:ACC: | ``One feature that sets Neutron aside from other Network packages is the support for "Authoritative Creation Calls" (ACCs).``
-      | ``Is basically the same as RCC, except that: ACC are sent from the server to the client.``
-
-Neutron was created with the aim of serving all games,
-from FPS to MMORPG and even simpler games, whatever you want.
-
-Configuring the server
-=========================
-
-- Download package from the GitHub repository.
-- Put in the Unity assets folder.
-
-.. note:: Now let's create two layers necessary for the server to work, create the layer "ServerObject" and "ClientObject"
-
-Now that we’ve finished the basics, let’s get started.
-
-- Create an object like the one in the image.
-
-.. image:: ..\\Images\\ServerController.png
+- *Faça o download do Neutron no repositório:* https://github.com/RuanCardoso/Neutron-Unity-Network
+- *Extraia o .zip, entre na pasta e renomeie a sub-pasta para "Neutron"*
+ 
+.. image:: ..\\Images\\subfolder_rename.png
    :class: img
 
-- Create the Object "Server Controller".
+- *Verifique se seu projeto possui o "Newtonsoft Json", caso tenha-o instalado, pule este passo, caso não tenha o "Newtonsoft Json" instale o .unitypackage "JsonAutoInstaller" que se encontra dentro da pasta "Neutron", este fará a instalação automática do "Newtonsoft Json" em seu projeto.*
 
-.. note:: The name of the object doesn't matter
+.. warning:: *Antes de instalar o Neutron é extremamente necessário instalar o "Newtonsoft Json" antes, caso contrário, você obterá erros de compilação. Observe que após a instalação do "Newtonsoft Json" o mesmo se encontrará na pasta "Packages" em vez de "Assets"*
+.. note:: *As versões mais recentes da Unity, 2020 em diante, já possui o "Newtonsoft Json" instalado por padrão na pasta "Packages", o mesmo se encontra na pasta "Packages" logo abaixo de "Assets".*
 
-- Put the script "Neutron Server" in the object was created.
-- The server is ready.
-
-**Parameters:**
-
-:Time Delta: | ``The completion time in seconds since the last frame.``
-             | ``This property provides the time between the current and previous frame.``
-
-:Channels: | ``Add server channels here.``
-           | ``Internal ID: The value of this field must be unique.``
-           | ``Name: The Channel Name.``
-           | ``Count(ReadOnly): The number of players in this channel.``
-           | ``Max Players: The maximum number of players on this channel.``
-
-:Buffers: | ``Coming soon....``
-
-:Rooms: | ``Rooms automatically created by the server.``
-           | ``The rooms can also be created by the clients, except the channels.``
-
-.. image:: ..\\Images\\ServerConfig.png
+.. image:: ..\\Images\\jsonautoinstaller.png
    :class: img
 
-:Compression Mode: ``The type of data compression that will be used, the default is DEFLATE.``
+- *Agora que você já tem o pacote "Newtonsoft Json", basta arrastar a pasta "Neutron" para a pasta "Assets" da Unity.*
 
-:Server Port: ``The port on which the server listens for data.``
+  .. image:: ..\\Images\\neutronfolderdrop.png
+   :class: img
 
-:Voice Port: ``The port on which the voice server listens for voice data.``
+- *Instalação concluída (:*
 
-:BackLog: ``The maximum length of the pending connections queue``
+Configurando o Neutron
+=============================
 
-:FPS: ``Frame rate of Server.``
+- *Pressione "Alt+F11" para abrir as configurações do Neutron ou abra-o pelo menu "Neutron->Settings->File->Neutron".*
 
-:DPF: ``Amount of queue data processed per frame.``
+.. image:: ..\\Images\\config.png
+   :class: img
 
-:Send Rate: ``Delay between sending each packet, 0 will overload the CPU.``
+:Addresses: *A lista de endereços ip de servidores, o index 0 é usado por padrão.*
+:Port: *A porta Tcp que será utilizado para estabelecer a conexão com os servidores.*
 
-:Quick Packets: ``Enables fast processing of TCP packets, note: if enabled, packets sent too often may fail.``
+.. warning:: *Não se esqueça de liberar a porta Tcp no Firewall e no Gerenciamento de Portas do seu Cloud(Google, Amazon, Azure...etc), no caso do Udp, você deve liberar todas as portas Udp, exceto as portas exclusivas para outras aplicações, a fim de evitar vulnerabilidades.*
 
-:No Delay: ``Gets or sets a value that disables a delay when send or receive buffers are not full.``
+:AppId: *Usado para identificar a versão do seu Jogo.*
 
-:Anti-Cheat: ``Activate or deactivate the server's anti-cheat.``
+.. warning:: *Se o AppId do cliente é diferente do AppId do servidor a conexão será rejeitada, útil para impedir que versões antigas se conectem ao servidor. Antes de compilar as duas versões(Client e Servidor) é recomendado que gere um novo AppId.*
 
-.. note:: AntiCheat leave it disabled if you use authority.
+.. image:: ..\\Images\\genappid.png
+   :class: img
 
-:Teleport Tolerance: ``Maximum teleport distance to detect the player.``
+:Fps: *Limita o Fps da compilação atual.*
 
-:SpeedHack Tolerance: ``Frequency with which packets arrive at the server per second.``
+.. warning:: *O SendRate(Taxa de Envio) é limitado ao fps do jogo, ex: se o fps atual é 30, e o SendRate está definido em 128 vezes por segundo, o SendRate será limitado a 30 vezes por segundo, resumindo, o SendRate não pode ser maior que a taxa de fps, é limitado automaticamente.*
 
-:URI Login: | ``Activate your local network, ex: ”Xampp“, and inside the``
-            | ``"htdocs" folder create the Network folder and put the "login.php" script.``
-            | ``A login script as example and find on GitHub.``
+:Pool Capacity: *Stream and Packet Pool Capacity, isto é, a quantidade de objetos pré-inicializados para uso e a quantidade máxima de objetos no pool.*
 
-:Time Delta: ``The "time.DeltaTime" of server, is ReadOnly.``
+.. note:: *"Stream pool", reutilizará "streams" para escrever novamente na rede, o mesmo para "Packet Pool" que reutilizará pacotes. Quanto maior o SendRate mais objetos serão retirados do pool. ex: uma Taxa de 64 vezes por segundo vai precisar de uma capacidade maior no pool, caso contrário, haverá estouros, em caso de estouros, um novo objeto será criado para evitar que seu servidor pare de funcionar, a criação de novos objetos gera alocações no GC.*
 
-:Channels: ``The server's pre-existing channels.``
+:Serialization: *O tipo de serialização que será usado para transformar um objeto em um fluxo de dados para ser enviado via rede.*
+:Compression: *O tipo de compressão de dados que será usado para compactar os dados enviados via rede*
 
-.. note:: Ignore the tolerance if you do not use Anti-Cheat enabled, if you use authority, ignore this too. More if you use RPC to synchronize movements, do not ignore this.
+.. warning:: *Observe que compressão de dados aumenta o uso de Cpu, pois os mesmos devem ser compactado antes de enviar e descompactado após chegar ao destino.*
 
-.. note:: | Speed Tolerance: The calculation is: **n * 1000 = result; -> 1000 / result = final result;**
-          | **eg: 0.1 * 1000 = 100 -> 1000/100 = 10;**
-          | In other words, if you synchronize the movement via RPC every 0.1 second or 100 milliseconds, your speedhack tolerance will be 10.
+:NoDelay: *Obtém ou define um valor que desabilita um atraso ao enviar ou receber buffers que não estão cheios.*
 
-Configuring the client
-=========================
+.. note:: *Quando NoDelay é false, a rede não envia um pacote até que ele tenha coletado uma quantidade significativa de dados de saída. Devido à quantidade de sobrecarga em um segmento TCP, o envio de pequenas quantidades de dados é ineficiente. No entanto, existem situações em que você precisa enviar quantidades muito pequenas de dados ou esperar respostas imediatas de cada pacote enviado. Sua decisão deve avaliar a importância relativa da eficiência da rede em relação aos requisitos do aplicativo.*
 
-- Create de object "ClientController"
+:PingRate: *Medido em segundos, é enviado em X segundos um pacote de manuntenção Udp pro servidor.*
+:TcpKeepAlive: *Medido em segundos, é enviado em X segundos um pacote de manuntenção Tcp pro servidor.*
 
-.. note:: The name of the object doesn't matter
+.. note:: *Os pacotes de manuntenção são enviados com a única finalidade de manter a conexão ativa.*
 
-- Create the connection script and put in object was created.
-- put too "Neutron Physics Ignore".
+:Backlog: *A quantidade máxima de conexões em espera na fila.*
+:Container Name: *O nome da cena(scene) do cliente.*
+:Max Udp Packet Size: *O tamanho máximo do pacote Udp que pode ser enviado ou recebido.*
 
-.. image:: ..\\Images\\ClientController.png
+.. note:: *Max Udp Packet Size, recomendo o valor de 512 bytes, este valor não excede o valor MTU mínimo, logo as chances do pacote ser fragmentado é zero. Quanto maior o tamanho do pacote Udp, maior são as chances do pacote ser fragmentado ao longo do caminho, isto porque, corre o risco de ao longo do caminho o tamanho exceder o MTU de algum router. Neutron não suporta a fragmentação de pacotes Udp.*
 
-- Ready :D
+:Max Tcp Packet Size: *O tamanho máximo do pacote Tcp que pode ser enviado ou recebido.*
+:Receive Buffer Size: *Define o número de bytes que você espera armazenar no buffer de recebimento para cada operação de leitura.*
+:Send Buffer Size: *Define o número de bytes que você espera enviar em cada chamada para a rede.*
+:Max Connections Per Ip: *Define a quantidade máxima que o mesmo Ip pode se conectar ao servidor.*
 
-Configuring the connection
-------------------------------
+.. note:: *Max Connections Per Ip, pode ser usado para limitar quantos jogos podem ser aberto na mesma rede. Ex: se o valor ser 1, somente um jogo pode ser aberto na mesma rede, outra instância do jogo será desconectada.*
 
-- First we need to create a Neutron instance.
+:Max Latency: *A latência máxima tolerada pelo servidor.*
 
-.. code-block:: C#
-   :linenos:
+.. warning:: *Qualquer valor que excede Max Latency, o servidor irá acionar o evento "OnMaxLatencyReached". Ex: dentro do evento você pode enviar a ação de desconectar, expulsar ou qualquer outra ação.*
 
-   void Start() {
-      var clientInstance = Neutron.CreateClient(ClientType.MainPlayer); // this instance can be accessed by **Neutron.Client**
-   }
+:Time Desync Tolerance: *O tempo máximo em segundos que o servidor tolera de dessincronização do cliente.*
 
-.. tip:: The main instance (MainPlayer), "clientInstance" that you will see below can be accessed from other scripts through "Neutron.Client"
+.. note:: *Ex: Time Desync Tolerance é 1, isto é, o servidor tolera que o cliente esteja 1 segundo atrasado, se exceder, o evento "OnDesyncToleranceReached" será acionado.*
 
-- Now let's record the events.
+:Time Resync Tolerance: *Medido em segundos, define a tolerância de ressincronização.*
 
-.. code-block:: C#
-   :linenos:
-   :emphasize-lines: 6
+.. note:: *Ex: Time Resync Tolerance: é 0.001, isto é, se a diferença do tempo do servidor e do cliente é maior que o valor definido, o tempo será ressincronizado.*
 
-   void Start() {
-      var clientInstance = Neutron.CreateClient(ClientType.MainPlayer); // this instance can be accessed by **Neutron.Client**
+:Receive Model: *Define se o modo de recebimento dos dados é sincrono ou assíncrono.*
+:Send Model: *Define se o modo de enviar os dados é sincrono ou assíncrono.*
+:Async Pattern: *Define os padrões para a execução de operações assíncronas*
 
-      //events
+.. tip:: *O modelo de envio Async e o padrão Tap, é recomendado o uso em caso de baixa frêquencia de envio e recebimento de dados, estes, geram muita alocaçãos no GC e alto uso de CPU. A configuração padrão é ideal para todos os casos de uso.*
 
-      clientInstance.onNeutronConnected += OnNeutronConnected; // registered method.
-      clientInstance.Connect("localhost", 5055); // IP And Port to connect.
-   }
-
-- Registered method.
+*Modelo Tap*:
 
 .. code-block:: C#
    :linenos:
 
-   void OnNeutronConnected(bool success, Neutron localInstance) {
-      Debug.Log("ready");
+   Task Test() {
+      return new Task();
    }
 
-- Ready, connection established.
-
-Matchmaking
--------------
-
-- Set the your nickname, First let's record the nickname change event.
-
-.. note:: The nickname can be changed by both the client and the server. You can remove the client's permission to change the nickname on the server.
-
-.. code-block:: C#
-   :linenos:
-   :emphasize-lines: 7
-
-   void Start() {
-      var clientInstance = Neutron.CreateClient(ClientType.MainPlayer); // this instance can be accessed by **Neutron.Client**
-
-      //events
-
-      clientInstance.onNeutronConnected += OnNeutronConnected; // registered method.
-      clientInstance.onNicknameChanged += OnNickname; // nickname event.
-      clientInstance.Connect("localhost", 5055); // IP And Port to connect.
-   }
-
-- Registered method.
+*Modelo Apm*:
 
 .. code-block:: C#
    :linenos:
 
-   void OnNickname(Neutron instance) {
-      // Nickname has changed.
+   void BeginTest() {
+      
    }
 
-**Create Room and Join Room/Channel:**
-
-- We will record the events.
-
-.. code-block:: C#
-   :linenos:
-   :emphasize-lines: 8, 9, 10
-
-   void Start() {
-      var clientInstance = Neutron.CreateClient(ClientType.MainPlayer); // this instance can be accessed by **Neutron.Client**
-
-      //events
-
-      clientInstance.onNeutronConnected += OnNeutronConnected; // registered method.
-      clientInstance.onNicknameChanged += OnNickname; // nickname event.
-      clientInstance.onPlayerJoinedChannel += OnJoinedChannel;
-      clientInstance.onPlayerJoinedRoom += OnJoinedRoom;
-      clientInstance.onCreatedRoom += OnCreatedRoom;
-      clientInstance.Connect("localhost", 5055); // IP And Port to connect.
+   void EndTest() {
+      
    }
 
-- Registered methods.
+:Encoding: *Define o tipo de codificação para o processo de transformar um conjunto de caracteres em uma sequência de bytes.*
 
-.. code-block:: C#
-   :linenos:
+.. warning:: *Esta propriedade pode causar o aumento exponencial do uso de largura de banda*
 
-   void OnCreatedRoom(Room room, NeutronReader options, Neutron localInstance) {
-      //Created
-   }
+:Header Size: *Define o tipo de primitivo que será usado para armazenar o tamanho da mensagem no cabeçalho do pacote.*
 
-   void OnJoinedRoom(Player player, int id, Neutron instance) {
-      // Joined
-   }
-
-   void OnJoinedChannel(Player player, Neutron instance) {
-      // Joined
-   }
-
-eg:
-
-.. code-block:: C#
-   :linenos:
-
-   void OnNickname(Neutron instance) {
-      instance.JoinChannel(0); // join to a channel 0. if a channel not exist in server, an error message will be displayed.
-   }
-
-- Creating a room
-
-.. code-block:: C#
-
-   public void CreateRoom() {
-        Neutron.Client.CreateRoom("room name", 100, null, new NeutronWriter());
-
-        // or instance.CreateRoom("room name", 100, null, new NeutronWriter());
-   }
+.. warning:: *Esta propriedade pode causar o aumento exponencial do uso de largura de banda*

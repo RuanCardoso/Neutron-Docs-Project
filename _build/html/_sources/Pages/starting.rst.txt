@@ -7,7 +7,7 @@ Começando
 - *Faça o download do Neutron no repositório:* https://github.com/RuanCardoso/Neutron-Unity-Network
 - *Extraia o .zip, entre na pasta e renomeie a sub-pasta para "Neutron"*
  
-.. image:: ..\\Images\\subfolder_rename.png
+.. image:: /Images/subfolder_rename.png
    :class: img
 
 - *Verifique se seu projeto possui o "Newtonsoft Json", caso tenha-o instalado, pule este passo, caso não tenha o "Newtonsoft Json" instale o .unitypackage "JsonAutoInstaller" que se encontra dentro da pasta "Neutron", este fará a instalação automática do "Newtonsoft Json" em seu projeto.*

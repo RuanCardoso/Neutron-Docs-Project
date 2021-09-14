@@ -15,12 +15,12 @@ Começando
 .. warning:: *Antes de instalar o Neutron é extremamente necessário instalar o "Newtonsoft Json" antes, caso contrário, você obterá erros de compilação. Observe que após a instalação do "Newtonsoft Json" o mesmo se encontrará na pasta "Packages" em vez de "Assets"*
 .. tip:: *As versões mais recentes da Unity, 2020 em diante, já possui o "Newtonsoft Json" instalado por padrão na pasta "Packages", o mesmo se encontra na pasta "Packages" logo abaixo de "Assets".*
 
-.. image:: ..\\Images\\jsonautoinstaller.png
+.. image:: /Images/jsonautoinstaller.png
    :class: img
 
 - *Agora que você já tem o pacote "Newtonsoft Json", basta arrastar a pasta "Neutron" para a pasta "Assets" da Unity.*
 
-  .. image:: ..\\Images\\neutronfolderdrop.png
+  .. image:: /Images/neutronfolderdrop.png
    :class: img
 
 - *Instalação concluída (:*
@@ -30,7 +30,7 @@ Configurando o Neutron
 
 - *Pressione "Alt+F11" para abrir as configurações do Neutron ou abra-o pelo menu "Neutron->Settings->File->Neutron".*
 
-.. image:: ..\\Images\\config.png
+.. image:: /Images/config.png
    :class: img
 
 :Addresses: *A lista de endereços ip de servidores, o index 0 é usado por padrão.*
@@ -42,7 +42,7 @@ Configurando o Neutron
 
 .. warning:: *Se o AppId do cliente é diferente do AppId do servidor a conexão será rejeitada, útil para impedir que versões antigas se conectem ao servidor. Antes de compilar as duas versões(Client e Servidor) é recomendado que gere um novo AppId.*
 
-.. image:: ..\\Images\\genappid.png
+.. image:: /Images/genappid.png
    :class: img
 
 :Fps: *Limita o Fps da compilação atual.*
@@ -142,7 +142,7 @@ Configurando o Neutron
 :Tunneling To: *Define o túnel onde os dados devem ser tunelados.*
 :Protocol: *O protocolo que será usado para transmitir o pacote via rede.*
 
-.. image:: ..\\Images\\syncconfig.png
+.. image:: /Images/syncconfig.png
    :class: img
 
 Conexão e Eventos

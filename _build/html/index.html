@@ -1,0 +1,249 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Neutron &mdash; Neutron 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Começando" href="Pages/starting.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home" alt="Documentation Home"> Neutron
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Neutron Framework</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Pages/starting.html">Começando</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Neutron</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Neutron</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="neutron">
+<h1>Neutron<a class="headerlink" href="#neutron" title="Permalink to this headline">¶</a></h1>
+<p><em>Neutron é um framework de rede ClientSide e ServerSide para a engine Unity, é usado criar jogos multijogador simples e avançados, tem um sistema de Matchmaking flexível que coloca seus jogadores em salas, canais e grupos.</em> <span class="raw-html"><br/></span>
+<em>Neutron tem um alto poder de customização ao lado do cliente ou servidor, é orientado a eventos e pode fazer oque você quiser utilizando seu alto poder de customização.</em> <span class="raw-html"><br/></span>
+<em>Neutron é multi-threading e busca sempre antigir alta performance, baixo consumo de banda e baixo nível de alocações no GC, não possui limites de Ccu, possui 3 protocolos que podem ser usados simultaneamente, TCP, UDP E RUDP(Reliable Udp).</em> <span class="raw-html"><br/></span></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><em>Neutron utiliza reflexão para encontrar os metódos no Awake, que possui um baixo custo pois é executado somente uma vez, os metódos são invocados via delegados(delegates) para alta performance.</em></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><em>Neutron não busca assets e não marca assets com Guid, os objetos são identificados por um Id(NeutronView) que é armazenado em um dicionário para alta performance.</em></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><em>Neutron está em ativo desenvolvimento e nosso objetivo é sempre manter o maior nível possível de performance e o menor consumo de banda possível, sem esquecer das alocações no GC (;</em></p>
+</div>
+<p><em>Este é um breve resumo, para saber do que Neutron é capaz, continue lendo….</em></p>
+<div class="section" id="log-de-mudancas">
+<h2>Log de Mudanças<a class="headerlink" href="#log-de-mudancas" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="versao-2-0-beta">
+<h3><em>Versão 2.0(Beta)</em><a class="headerlink" href="#versao-2-0-beta" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><em>gRPC</em></p></li>
+<li><p><em>iRPC</em></p></li>
+<li><p><em>SyncVar</em></p></li>
+<li><p><em>Auto Synchronization</em></p></li>
+<li><p><em>Matchmaking</em></p></li>
+<li><p><em>Custom Packets</em></p></li>
+<li><p><em>etc..</em></p></li>
+</ul>
+</div>
+<div class="section" id="versao-1-0-alpha">
+<h3><em>Versão 1.0(Alpha)</em><a class="headerlink" href="#versao-1-0-alpha" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><em>Lançamento do Neutron.</em></p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Pages/starting.html" class="btn btn-neutral float-right" title="Começando" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Ruan Cardoso
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

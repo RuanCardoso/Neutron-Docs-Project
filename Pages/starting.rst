@@ -184,3 +184,9 @@ Conexão e Eventos
    {
        //* Faça algo.
    }
+
+   
+   private void OnPlayerConnected(NeutronPlayer player, bool isMine, Neutron neutron)
+   {
+      
+   }

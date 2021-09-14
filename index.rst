@@ -35,4 +35,4 @@ Log de Mudanças
    :hidden:
    :maxdepth: 2
 
-   Pages/gettingstarted
+   Pages/starting

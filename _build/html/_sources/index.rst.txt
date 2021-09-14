@@ -4,7 +4,7 @@
 ********************
 Neutron
 ********************
-*Neutron é um framework Unity para criar jogos multijogador simples e avançados, tem um sistema de Matchmaking flexível que coloca seus jogadores em salas, canais e grupos.* :raw-html:`<br/>`
+*Neutron é um framework de rede ClientSide e ServerSide para a engine Unity, é usado criar jogos multijogador simples e avançados, tem um sistema de Matchmaking flexível que coloca seus jogadores em salas, canais e grupos.* :raw-html:`<br/>`
 *Neutron tem um alto poder de customização ao lado do cliente ou servidor, é orientado a eventos e pode fazer oque você quiser utilizando seu alto poder de customização.* :raw-html:`<br/>`
 *Neutron é multi-threading e busca sempre antigir alta performance, baixo consumo de banda e baixo nível de alocações no GC, não possui limites de Ccu, possui 3 protocolos que podem ser usados simultaneamente, TCP, UDP E RUDP(Reliable Udp).* :raw-html:`<br/>`
 

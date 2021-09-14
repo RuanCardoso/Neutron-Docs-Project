@@ -85,6 +85,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Começando</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#configurando-o-neutron">Configurando o Neutron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conexao-e-eventos">Conexão e Eventos</a></li>
 </ul>
 </li>
 </ul>
@@ -167,8 +168,8 @@
 <p class="admonition-title">Warning</p>
 <p><em>Antes de instalar o Neutron é extremamente necessário instalar o “Newtonsoft Json” antes, caso contrário, você obterá erros de compilação. Observe que após a instalação do “Newtonsoft Json” o mesmo se encontrará na pasta “Packages” em vez de “Assets”</em></p>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p><em>As versões mais recentes da Unity, 2020 em diante, já possui o “Newtonsoft Json” instalado por padrão na pasta “Packages”, o mesmo se encontra na pasta “Packages” logo abaixo de “Assets”.</em></p>
 </div>
 <img alt="../_images/jsonautoinstaller.png" class="img" src="../_images/jsonautoinstaller.png" />
@@ -286,8 +287,8 @@
 <dd class="field-even"><p><em>Define a quantidade máxima que o mesmo Ip pode se conectar ao servidor.</em></p>
 </dd>
 </dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p><em>Max Connections Per Ip, pode ser usado para limitar quantos jogos podem ser aberto na mesma rede. Ex: se o valor ser 1, somente um jogo pode ser aberto na mesma rede, outra instância do jogo será desconectada.</em></p>
 </div>
 <dl class="field-list simple">
@@ -325,7 +326,7 @@
 <dd class="field-even"><p><em>Define se o modo de enviar os dados é sincrono ou assíncrono.</em></p>
 </dd>
 <dt class="field-odd">Async Pattern</dt>
-<dd class="field-odd"><p><em>Define os padrões para a execução de operações assíncronas</em></p>
+<dd class="field-odd"><p><em>Define os padrões para a execução de operações assíncronas.</em></p>
 </dd>
 </dl>
 <div class="admonition tip">
@@ -363,7 +364,7 @@
 </dl>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p><em>Esta propriedade pode causar o aumento exponencial do uso de largura de banda</em></p>
+<p><em>Esta propriedade pode causar o aumento exponencial do uso de largura de banda.</em></p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Header Size</dt>
@@ -372,8 +373,92 @@
 </dl>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p><em>Esta propriedade pode causar o aumento exponencial do uso de largura de banda</em></p>
+<p><em>Esta propriedade pode causar o aumento exponencial do uso de largura de banda.</em></p>
 </div>
+<dl class="field-list simple">
+<dt class="field-odd">Buffered Stream</dt>
+<dd class="field-odd"><p><em>Adiciona uma camada de armazenamento em buffer para ler e gravar operações em outro fluxo.</em></p>
+</dd>
+</dl>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><em>O uso de BufferedStream aumenta em até dez vezes o desempenho sobre operações E/S no socket Tcp.</em></p>
+</div>
+<p><strong>Synchronization</strong></p>
+<ul class="simple">
+<li><p><em>Pressione “Alt+F10” para abrir as configurações de Sincronização ou abra-o pelo menu “Neutron-&gt;Settings-&gt;File-&gt;Synchronization”.</em></p></li>
+</ul>
+<p><em>Aqui você pode personalizar o alvo de alguns pacotes internos do Neutron.</em></p>
+<dl class="field-list simple">
+<dt class="field-odd">TargetTo</dt>
+<dd class="field-odd"><p><em>Define os alvos de recepção do pacote.</em></p>
+</dd>
+<dt class="field-even">Tunneling To</dt>
+<dd class="field-even"><p><em>Define o túnel onde os dados devem ser tunelados.</em></p>
+</dd>
+<dt class="field-odd">Protocol</dt>
+<dd class="field-odd"><p><em>O protocolo que será usado para transmitir o pacote via rede.</em></p>
+</dd>
+</dl>
+<img alt="../_images/syncconfig.png" class="img" src="../_images/syncconfig.png" />
+</div>
+<div class="section" id="conexao-e-eventos">
+<h2>Conexão e Eventos<a class="headerlink" href="#conexao-e-eventos" title="Permalink to this headline">¶</a></h2>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><em>Muitos metódos e eventos possui o último parâmetro do tipo “Neutron”, este parâmetro é a instância que chamou o metódo ou evento.</em></p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><em>Muitos metódos e eventos possui o parâmetro do tipo “bool” chamado de “isMine”, este parâmetro retorna se o “Player” passado como parâmetro é seu.</em></p>
+</div>
+<p><em>Para começamos com Neutron é muito simples:</em></p>
+<ul class="simple">
+<li><p><em>Primeiro iremos criar uma instância de Neutron.</em></p></li>
+</ul>
+<div class="highlight-C# notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">Neutron</span> <span class="n">neutron</span> <span class="p">=</span> <span class="n">Neutron</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">ClientMode</span><span class="p">.</span><span class="n">Player</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+<p><em>Observe que o metódo</em> <strong>Neutron.Create()</strong> <em>leva 1 argumento opcional:</em></p>
+<dl class="field-list simple">
+<dt class="field-odd">ClientMode.Player</dt>
+<dd class="field-odd"><p><em>Define que está instância será a instância principal</em>.</p>
+</dd>
+<dt class="field-even">ClientMode.Virtual</dt>
+<dd class="field-even"><p><em>Cria uma instância que não é a instância principal</em>.</p>
+</dd>
+</dl>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><em>A instância principal é acessível através da propriedade estática “Neutron.Client”.</em></p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><em>A instância virtual pode ser usada para simular jogadores e outras ações.</em></p>
+</div>
+<ul class="simple">
+<li><p><em>Agora vamos registrar os eventos da instância.</em></p></li>
+</ul>
+<p><em>Neutron tem alguns eventos ao lado do cliente, sendo eles.</em></p>
+<div class="highlight-C# notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">neutron</span><span class="p">.</span><span class="n">OnNeutronConnected</span> <span class="p">+=</span> <span class="n">OnNeutronConnected</span><span class="p">;</span>
+<span class="n">neutron</span><span class="p">.</span><span class="n">OnPlayerConnected</span> <span class="p">+=</span> <span class="n">OnPlayerConnected</span><span class="p">;</span>
+
+<span class="c1">//Este evento é acionado quando uma tentativa de conexão retorna seu estado.</span>
+<span class="c1">//isSuccess: Retorna se a tentativa de conexão foi bem sucedida.</span>
+<span class="k">private</span> <span class="k">void</span> <span class="nf">OnNeutronConnected</span><span class="p">(</span><span class="kt">bool</span> <span class="n">isSuccess</span><span class="p">,</span> <span class="n">Neutron</span> <span class="n">neutron</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">//* Faça algo.</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
 </div>
 </div>
 

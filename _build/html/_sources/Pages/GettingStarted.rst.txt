@@ -13,7 +13,7 @@ Começando
 - *Verifique se seu projeto possui o "Newtonsoft Json", caso tenha-o instalado, pule este passo, caso não tenha o "Newtonsoft Json" instale o .unitypackage "JsonAutoInstaller" que se encontra dentro da pasta "Neutron", este fará a instalação automática do "Newtonsoft Json" em seu projeto.*
 
 .. warning:: *Antes de instalar o Neutron é extremamente necessário instalar o "Newtonsoft Json" antes, caso contrário, você obterá erros de compilação. Observe que após a instalação do "Newtonsoft Json" o mesmo se encontrará na pasta "Packages" em vez de "Assets"*
-.. note:: *As versões mais recentes da Unity, 2020 em diante, já possui o "Newtonsoft Json" instalado por padrão na pasta "Packages", o mesmo se encontra na pasta "Packages" logo abaixo de "Assets".*
+.. tip:: *As versões mais recentes da Unity, 2020 em diante, já possui o "Newtonsoft Json" instalado por padrão na pasta "Packages", o mesmo se encontra na pasta "Packages" logo abaixo de "Assets".*
 
 .. image:: ..\\Images\\jsonautoinstaller.png
    :class: img
@@ -78,7 +78,7 @@ Configurando o Neutron
 :Send Buffer Size: *Define o número de bytes que você espera enviar em cada chamada para a rede.*
 :Max Connections Per Ip: *Define a quantidade máxima que o mesmo Ip pode se conectar ao servidor.*
 
-.. note:: *Max Connections Per Ip, pode ser usado para limitar quantos jogos podem ser aberto na mesma rede. Ex: se o valor ser 1, somente um jogo pode ser aberto na mesma rede, outra instância do jogo será desconectada.*
+.. tip:: *Max Connections Per Ip, pode ser usado para limitar quantos jogos podem ser aberto na mesma rede. Ex: se o valor ser 1, somente um jogo pode ser aberto na mesma rede, outra instância do jogo será desconectada.*
 
 :Max Latency: *A latência máxima tolerada pelo servidor.*
 
@@ -94,7 +94,7 @@ Configurando o Neutron
 
 :Receive Model: *Define se o modo de recebimento dos dados é sincrono ou assíncrono.*
 :Send Model: *Define se o modo de enviar os dados é sincrono ou assíncrono.*
-:Async Pattern: *Define os padrões para a execução de operações assíncronas*
+:Async Pattern: *Define os padrões para a execução de operações assíncronas.*
 
 .. tip:: *O modelo de envio Async e o padrão Tap, é recomendado o uso em caso de baixa frêquencia de envio e recebimento de dados, estes, geram muita alocaçãos no GC e alto uso de CPU. A configuração padrão é ideal para todos os casos de uso.*
 
@@ -122,8 +122,65 @@ Configurando o Neutron
 
 :Encoding: *Define o tipo de codificação para o processo de transformar um conjunto de caracteres em uma sequência de bytes.*
 
-.. warning:: *Esta propriedade pode causar o aumento exponencial do uso de largura de banda*
+.. warning:: *Esta propriedade pode causar o aumento exponencial do uso de largura de banda.*
 
 :Header Size: *Define o tipo de primitivo que será usado para armazenar o tamanho da mensagem no cabeçalho do pacote.*
 
-.. warning:: *Esta propriedade pode causar o aumento exponencial do uso de largura de banda*
+.. warning:: *Esta propriedade pode causar o aumento exponencial do uso de largura de banda.*
+
+:Buffered Stream: *Adiciona uma camada de armazenamento em buffer para ler e gravar operações em outro fluxo.*
+
+.. tip:: *O uso de BufferedStream aumenta em até dez vezes o desempenho sobre operações E/S no socket Tcp.*
+
+**Synchronization**
+
+- *Pressione "Alt+F10" para abrir as configurações de Sincronização ou abra-o pelo menu "Neutron->Settings->File->Synchronization".*
+
+*Aqui você pode personalizar o alvo de alguns pacotes internos do Neutron.*
+
+:TargetTo: *Define os alvos de recepção do pacote.*
+:Tunneling To: *Define o túnel onde os dados devem ser tunelados.*
+:Protocol: *O protocolo que será usado para transmitir o pacote via rede.*
+
+.. image:: ..\\Images\\syncconfig.png
+   :class: img
+
+Conexão e Eventos
+=================================
+
+.. tip:: *Muitos metódos e eventos possui o último parâmetro do tipo "Neutron", este parâmetro é a instância que chamou o metódo ou evento.*
+.. tip:: *Muitos metódos e eventos possui o parâmetro do tipo "bool" chamado de "isMine", este parâmetro retorna se o "Player" passado como parâmetro é seu.*
+
+*Para começamos com Neutron é muito simples:*
+
+- *Primeiro iremos criar uma instância de Neutron.*
+
+.. code-block:: C#
+   :linenos:
+
+   Neutron neutron = Neutron.Create(ClientMode.Player);
+
+*Observe que o metódo* **Neutron.Create()** *leva 1 argumento opcional:*
+
+:ClientMode.Player: *Define que está instância será a instância principal*.
+:ClientMode.Virtual: *Cria uma instância que não é a instância principal*.
+
+.. tip:: *A instância principal é acessível através da propriedade estática "Neutron.Client".*
+.. tip:: *A instância virtual pode ser usada para simular jogadores e outras ações.*
+
+- *Agora vamos registrar os eventos da instância.*
+
+*Neutron tem alguns eventos ao lado do cliente, sendo eles.*
+
+.. code-block:: C#
+   :linenos:
+
+   neutron.OnNeutronConnected += OnNeutronConnected;
+   neutron.OnPlayerConnected += OnPlayerConnected;
+   
+   //Este evento é acionado quando uma tentativa de conexão retorna seu estado.
+   //isSuccess: Retorna se a tentativa de conexão foi bem sucedida.
+   private void OnNeutronConnected(bool isSuccess, Neutron neutron)
+   {
+       //* Faça algo.
+   }

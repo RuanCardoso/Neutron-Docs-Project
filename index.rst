@@ -32,7 +32,6 @@ Log de Mudanças
 
 .. toctree::
    :caption: Neutron Framework
-   :hidden:
-   :maxdepth: 2
 
    Pages/starting
+   Pages/rpc

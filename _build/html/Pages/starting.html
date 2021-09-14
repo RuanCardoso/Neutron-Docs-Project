@@ -36,6 +36,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Chamadas de Procedimento Remota" href="rpc.html" />
     <link rel="prev" title="Neutron" href="../index.html" /> 
 </head>
 
@@ -88,6 +89,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#conexao-e-eventos">Conexão e Eventos</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="rpc.html">Chamadas de Procedimento Remota</a></li>
 </ul>
 
             
@@ -454,7 +456,8 @@
 12
 13
 14
-15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">neutron</span><span class="p">.</span><span class="n">OnNeutronConnected</span> <span class="p">+=</span> <span class="n">OnNeutronConnected</span><span class="p">;</span>
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">neutron</span><span class="p">.</span><span class="n">OnNeutronConnected</span> <span class="p">+=</span> <span class="n">OnNeutronConnected</span><span class="p">;</span>
 <span class="n">neutron</span><span class="p">.</span><span class="n">OnPlayerConnected</span> <span class="p">+=</span> <span class="n">OnPlayerConnected</span><span class="p">;</span>
 
 <span class="c1">//Este evento é acionado quando uma tentativa de conexão retorna seu estado.</span>
@@ -464,7 +467,8 @@
     <span class="c1">//* Faça algo.</span>
 <span class="p">}</span>
 
-
+<span class="c1">//Este evento é acionado quando algum jogador se conecta ao servidor.</span>
+<span class="c1">//player: retorna o jogador recém conectado.</span>
 <span class="k">private</span> <span class="k">void</span> <span class="nf">OnPlayerConnected</span><span class="p">(</span><span class="n">NeutronPlayer</span> <span class="n">player</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">isMine</span><span class="p">,</span> <span class="n">Neutron</span> <span class="n">neutron</span><span class="p">)</span>
 <span class="p">{</span>
 
@@ -481,6 +485,8 @@
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="rpc.html" class="btn btn-neutral float-right" title="Chamadas de Procedimento Remota" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../index.html" class="btn btn-neutral float-left" title="Neutron" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

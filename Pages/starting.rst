@@ -185,7 +185,8 @@ Conexão e Eventos
        //* Faça algo.
    }
 
-   
+   //Este evento é acionado quando algum jogador se conecta ao servidor.
+   //player: retorna o jogador recém conectado.
    private void OnPlayerConnected(NeutronPlayer player, bool isMine, Neutron neutron)
    {
       

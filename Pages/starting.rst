@@ -132,6 +132,31 @@ Configurando o Neutron
 
 .. tip:: *O uso de BufferedStream aumenta em até dez vezes o desempenho sobre operações E/S no socket Tcp.*
 
+*Personalizando as configurações do Neutron para plataformas diferentes independentemente.*
+
+- *No construtor(constructor) da sua classe principal insira este código.*
+
+.. code-block:: C#
+   :linenos:
+
+   public GameNetwork()
+   {
+      if (NeutronModule.OnLoadSettings == null)
+         {
+            NeutronModule.OnLoadSettings += (Settings settings) =>
+            {
+               #if UNITY_EDITOR
+                 settings.GlobalSettings.FPS = 90; // 90 Fps para o Editor
+               #else
+                 settings.GlobalSettings.FPS = 20; // 20 Fps para outras plataformas.
+               #endif
+            };
+         }
+   }
+
+*Consulte* https://docs.unity3d.com/Manual/PlatformDependentCompilation.html *para conhecer algumas diretivas de pré-processador que permitem particionar seus scripts
+para compilar e executar uma seção de código exclusivamente para uma das plataformas suportadas.*
+
 **Synchronization**
 
 - *Pressione "Alt+F10" para abrir as configurações de Sincronização ou abra-o pelo menu "Neutron->Settings->File->Synchronization".*
@@ -176,18 +201,140 @@ Conexão e Eventos
    :linenos:
 
    neutron.OnNeutronConnected += OnNeutronConnected;
+   neutron.OnNeutronAuthenticated += OnNeutronAuthenticated;
    neutron.OnPlayerConnected += OnPlayerConnected;
+   neutron.OnPlayerDisconnected += OnPlayerDisconnected;
+   .....etc
    
    //Este evento é acionado quando uma tentativa de conexão retorna seu estado.
    //isSuccess: Retorna se a tentativa de conexão foi bem sucedida.
    private void OnNeutronConnected(bool isSuccess, Neutron neutron)
    {
-       //* Faça algo.
+       // Faça algo.
    }
 
    //Este evento é acionado quando algum jogador se conecta ao servidor.
-   //player: retorna o jogador recém conectado.
+   //player: Retorna o jogador recém conectado.
    private void OnPlayerConnected(NeutronPlayer player, bool isMine, Neutron neutron)
+   {
+      // Faça algo.
+   }
+
+   //Este evento é acionado quando uma tentativa de autenticação retorna seu estado.
+   //data: Retorna os dados do seu jogador enviados pelo servidor após a autenticação.
+   private void OnNeutronAuthenticated(bool isSuccess, JObject data, Neutron neutron)
+   {
+      //Debug.Log((string)data["nickname"]).
+   }
+
+   //Este evento é acionado quando algum jogador se desconecta do servidor.
+   //reason: A causa da desconexão.
+   //player: Retorna o jogador recém desconectado.
+   private void OnPlayerDisconnected(string reason, NeutronPlayer player, bool isMine, Neutron neutron)
+   {
+       // Faça algo.
+   }
+
+   //Este evento é acionado quando algum jogador envia uma mensagem e esta mensagem é recebida.
+   //message: Retorna a mensagem recebida do remetente.
+   //player: Retorna o jogador que enviou a mensagem.
+   private void OnMessageReceived(string message, NeutronPlayer player, bool isMine, Neutron neutron)
+   {
+       
+   }
+
+   //rooms: A lista de salas obtidas do servidor.
+   private void OnRoomsReceived(NeutronRoom[] rooms, Neutron neutron)
+   {
+      //neutron.JoinRoom(rooms[0].ID);
+   }
+
+   //channels: a lista de canais obtidas do servidor.
+   private void OnChannelsReceived(NeutronChannel[] channels, Neutron neutron)
+   {
+      neutron.JoinChannel(channels[0].ID);
+   }
+
+   //Este evento é acionado quando algum jogador sai da sala.
+   private void OnPlayerLeftRoom(NeutronRoom room, NeutronPlayer player, bool IsMine, Neutron neutron)
    {
       
    }
+   
+   //Este evento é acionado quando algum jogador sai do canal.
+   private void OnPlayerLeftChannel(NeutronChannel channel, NeutronPlayer player, bool IsMine, Neutron neutron)
+   {
+       
+   }
+   
+   //Este evento é acionado quando algum jogador entra na sala.
+   private void OnPlayerJoinedRoom(NeutronRoom room, NeutronPlayer player, Boolean isMine, Neutron instance)
+   {
+      
+   }
+
+   //Este evento é acionado quando algum jogador entra no canal.
+   private void OnPlayerJoinedChannel(NeutronChannel channel, NeutronPlayer player, Boolean isMine, Neutron neutron)
+   {
+
+   }
+
+   //Este evento é acionado quando algum jogador cria uma sala.
+   private void OnPlayerCreatedRoom(NeutronRoom room, NeutronPlayer player, bool isMine, Neutron neutron)
+   {
+       
+   }
+
+   //Este evento é acionado quando algum jogador troca seu nickname.
+   private void OnPlayerNicknameChanged(NeutronPlayer player, String nickname, Boolean isMine, Neutron neutron)
+   {
+       
+   }
+
+   //Este evento é acionado quando algum jogador atualiza suas propriedades.
+   private void OnPlayerPropertiesChanged(NeutronPlayer player, bool isMine, Neutron neutron)
+   {
+       
+   }
+
+   //Este evento é acionado quando algum jogador envia um pacote personalizado e este pacote é recebido.
+   private void OnPlayerCustomPacketReceived(NeutronReader reader, NeutronPlayer player, CustomPacket packet, Neutron neutron)
+   {
+       
+   }
+
+   //Este evento é acionado quando as propriedades da sala atual são alteradas.
+   private void OnRoomPropertiesChanged(NeutronPlayer player, bool isMine, Neutron neutron)
+   { 
+       
+   }
+
+   //Este evento é acionado quando algum pacote apresenta uma falha.
+   private void OnFail(Packet packet, string message, Neutron instance)
+   {
+       
+   }
+
+*Seu código deve se parecer com isto:*
+
+.. code-block:: C#
+   :linenos:
+
+   void Start()
+   {
+       Neutron neutron = Neutron.Create(ClientMode.Player); // Inicializa a instância.
+       neutron.OnNeutronConnected += OnNeutronConnected; //* Registra o evento de conexão.
+       neutron.Connect(); //* Inicia a tentativa de conexão.
+
+       // Outro exemplo, com autenticação ao lado do servidor.
+
+       neutron.Connect(authentication: new Authentication("user123", "pass123")); //* Inicia a conexão com base em uma autenticação personalizada ao lado do servidor.
+       // Alternativa:
+       Neutron.Client.Connect(authentication: new Authentication("user123", "pass123")); //* Inicia a conexão com base em uma autenticação personalizada ao lado do servidor.
+   }
+
+   private void OnNeutronConnected(bool isSuccess, Neutron neutron)
+   {
+       // Faça algo?
+   }
+

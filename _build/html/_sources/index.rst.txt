@@ -11,12 +11,15 @@ Neutron
 .. note:: *Neutron utiliza reflexão para encontrar os metódos no Awake, que possui um baixo custo pois é executado somente uma vez, os metódos são invocados via delegados(delegates) para alta performance.*
 .. note:: *Neutron não busca assets e não marca assets com Guid, os objetos são identificados por um Id(NeutronView) que é armazenado em um dicionário para alta performance.*
 .. note:: *Neutron está em ativo desenvolvimento e nosso objetivo é sempre manter o maior nível possível de performance e o menor consumo de banda possível, sem esquecer das alocações no GC (;*
+.. warning:: *Esta documentação leva em consideração que você saiba o básico da linguagem C# e da Unity Engine.*
+.. note:: *Suporte, Relato de Bugs, ou Contato Pessoal, envie um email para:* neutron050322@gmail.com
+.. note:: *Para contribuir com o projeto. Para transferências nacional, Brasil(Pix):* **0000-0000-00000**, *para Internacional(Paypal):* ruan@gmail.com
 
 *Este é um breve resumo, para saber do que Neutron é capaz, continue lendo....*
 
 Log de Mudanças
 ===========================
-*Versão 2.0(Beta)*
+*Versão 2.0(Beta) - Atual*
 ---------------------------
 - *gRPC*
 - *iRPC*
@@ -29,6 +32,10 @@ Log de Mudanças
 *Versão 1.0(Alpha)*
 ---------------------------
 - *Lançamento do Neutron.*
+
+Problemas Conhecidos
+===========================
+- Sem problemas encontrados.
 
 .. toctree::
    :caption: Neutron Framework

@@ -386,6 +386,41 @@
 <p class="admonition-title">Tip</p>
 <p><em>O uso de BufferedStream aumenta em até dez vezes o desempenho sobre operações E/S no socket Tcp.</em></p>
 </div>
+<p><em>Personalizando as configurações do Neutron para plataformas diferentes independentemente.</em></p>
+<ul class="simple">
+<li><p><em>No construtor(constructor) da sua classe principal insira este código.</em></p></li>
+</ul>
+<div class="highlight-C# notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nf">GameNetwork</span><span class="p">()</span>
+<span class="p">{</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">NeutronModule</span><span class="p">.</span><span class="n">OnLoadSettings</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+      <span class="p">{</span>
+         <span class="n">NeutronModule</span><span class="p">.</span><span class="n">OnLoadSettings</span> <span class="p">+=</span> <span class="p">(</span><span class="n">Settings</span> <span class="n">settings</span><span class="p">)</span> <span class="p">=&gt;</span>
+         <span class="p">{</span>
+            <span class="cp">#if UNITY_EDITOR</span>
+              <span class="n">settings</span><span class="p">.</span><span class="n">GlobalSettings</span><span class="p">.</span><span class="n">FPS</span> <span class="p">=</span> <span class="m">90</span><span class="p">;</span> <span class="c1">// 90 Fps para o Editor</span>
+            <span class="cp">#else</span>
+              <span class="n">settings</span><span class="p">.</span><span class="n">GlobalSettings</span><span class="p">.</span><span class="n">FPS</span> <span class="p">=</span> <span class="m">20</span><span class="p">;</span> <span class="c1">// 20 Fps para outras plataformas.</span>
+            <span class="cp">#endif</span>
+         <span class="p">};</span>
+      <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p><em>Consulte</em> <a class="reference external" href="https://docs.unity3d.com/Manual/PlatformDependentCompilation.html">https://docs.unity3d.com/Manual/PlatformDependentCompilation.html</a> <em>para conhecer algumas diretivas de pré-processador que permitem particionar seus scripts
+para compilar e executar uma seção de código exclusivamente para uma das plataformas suportadas.</em></p>
 <p><strong>Synchronization</strong></p>
 <ul class="simple">
 <li><p><em>Pressione “Alt+F10” para abrir as configurações de Sincronização ou abra-o pelo menu “Neutron-&gt;Settings-&gt;File-&gt;Synchronization”.</em></p></li>
@@ -442,6 +477,236 @@
 <li><p><em>Agora vamos registrar os eventos da instância.</em></p></li>
 </ul>
 <p><em>Neutron tem alguns eventos ao lado do cliente, sendo eles.</em></p>
+<div class="highlight-C# notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">neutron</span><span class="p">.</span><span class="n">OnNeutronConnected</span> <span class="p">+=</span> <span class="n">OnNeutronConnected</span><span class="p">;</span>
+<span class="n">neutron</span><span class="p">.</span><span class="n">OnNeutronAuthenticated</span> <span class="p">+=</span> <span class="n">OnNeutronAuthenticated</span><span class="p">;</span>
+<span class="n">neutron</span><span class="p">.</span><span class="n">OnPlayerConnected</span> <span class="p">+=</span> <span class="n">OnPlayerConnected</span><span class="p">;</span>
+<span class="n">neutron</span><span class="p">.</span><span class="n">OnPlayerDisconnected</span> <span class="p">+=</span> <span class="n">OnPlayerDisconnected</span><span class="p">;</span>
+<span class="p">.....</span><span class="n">etc</span>
+
+<span class="c1">//Este evento é acionado quando uma tentativa de conexão retorna seu estado.</span>
+<span class="c1">//isSuccess: Retorna se a tentativa de conexão foi bem sucedida.</span>
+<span class="k">private</span> <span class="k">void</span> <span class="nf">OnNeutronConnected</span><span class="p">(</span><span class="kt">bool</span> <span class="n">isSuccess</span><span class="p">,</span> <span class="n">Neutron</span> <span class="n">neutron</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// Faça algo.</span>
+<span class="p">}</span>
+
+<span class="c1">//Este evento é acionado quando algum jogador se conecta ao servidor.</span>
+<span class="c1">//player: Retorna o jogador recém conectado.</span>
+<span class="k">private</span> <span class="k">void</span> <span class="nf">OnPlayerConnected</span><span class="p">(</span><span class="n">NeutronPlayer</span> <span class="n">player</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">isMine</span><span class="p">,</span> <span class="n">Neutron</span> <span class="n">neutron</span><span class="p">)</span>
+<span class="p">{</span>
+   <span class="c1">// Faça algo.</span>
+<span class="p">}</span>
+
+<span class="c1">//Este evento é acionado quando uma tentativa de autenticação retorna seu estado.</span>
+<span class="c1">//data: Retorna os dados do seu jogador enviados pelo servidor após a autenticação.</span>
+<span class="k">private</span> <span class="k">void</span> <span class="nf">OnNeutronAuthenticated</span><span class="p">(</span><span class="kt">bool</span> <span class="n">isSuccess</span><span class="p">,</span> <span class="n">JObject</span> <span class="n">data</span><span class="p">,</span> <span class="n">Neutron</span> <span class="n">neutron</span><span class="p">)</span>
+<span class="p">{</span>
+   <span class="c1">//Debug.Log((string)data[&quot;nickname&quot;]).</span>
+<span class="p">}</span>
+
+<span class="c1">//Este evento é acionado quando algum jogador se desconecta do servidor.</span>
+<span class="c1">//reason: A causa da desconexão.</span>
+<span class="c1">//player: Retorna o jogador recém desconectado.</span>
+<span class="k">private</span> <span class="k">void</span> <span class="nf">OnPlayerDisconnected</span><span class="p">(</span><span class="kt">string</span> <span class="n">reason</span><span class="p">,</span> <span class="n">NeutronPlayer</span> <span class="n">player</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">isMine</span><span class="p">,</span> <span class="n">Neutron</span> <span class="n">neutron</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// Faça algo.</span>
+<span class="p">}</span>
+
+<span class="c1">//Este evento é acionado quando algum jogador envia uma mensagem e esta mensagem é recebida.</span>
+<span class="c1">//message: Retorna a mensagem recebida do remetente.</span>
+<span class="c1">//player: Retorna o jogador que enviou a mensagem.</span>
+<span class="k">private</span> <span class="k">void</span> <span class="nf">OnMessageReceived</span><span class="p">(</span><span class="kt">string</span> <span class="n">message</span><span class="p">,</span> <span class="n">NeutronPlayer</span> <span class="n">player</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">isMine</span><span class="p">,</span> <span class="n">Neutron</span> <span class="n">neutron</span><span class="p">)</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+
+<span class="c1">//rooms: A lista de salas obtidas do servidor.</span>
+<span class="k">private</span> <span class="k">void</span> <span class="nf">OnRoomsReceived</span><span class="p">(</span><span class="n">NeutronRoom</span><span class="p">[]</span> <span class="n">rooms</span><span class="p">,</span> <span class="n">Neutron</span> <span class="n">neutron</span><span class="p">)</span>
+<span class="p">{</span>
+   <span class="c1">//neutron.JoinRoom(rooms[0].ID);</span>
+<span class="p">}</span>
+
+<span class="c1">//channels: a lista de canais obtidas do servidor.</span>
+<span class="k">private</span> <span class="k">void</span> <span class="nf">OnChannelsReceived</span><span class="p">(</span><span class="n">NeutronChannel</span><span class="p">[]</span> <span class="n">channels</span><span class="p">,</span> <span class="n">Neutron</span> <span class="n">neutron</span><span class="p">)</span>
+<span class="p">{</span>
+   <span class="n">neutron</span><span class="p">.</span><span class="n">JoinChannel</span><span class="p">(</span><span class="n">channels</span><span class="p">[</span><span class="m">0</span><span class="p">].</span><span class="n">ID</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">//Este evento é acionado quando algum jogador sai da sala.</span>
+<span class="k">private</span> <span class="k">void</span> <span class="nf">OnPlayerLeftRoom</span><span class="p">(</span><span class="n">NeutronRoom</span> <span class="n">room</span><span class="p">,</span> <span class="n">NeutronPlayer</span> <span class="n">player</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">IsMine</span><span class="p">,</span> <span class="n">Neutron</span> <span class="n">neutron</span><span class="p">)</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+
+<span class="c1">//Este evento é acionado quando algum jogador sai do canal.</span>
+<span class="k">private</span> <span class="k">void</span> <span class="nf">OnPlayerLeftChannel</span><span class="p">(</span><span class="n">NeutronChannel</span> <span class="n">channel</span><span class="p">,</span> <span class="n">NeutronPlayer</span> <span class="n">player</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">IsMine</span><span class="p">,</span> <span class="n">Neutron</span> <span class="n">neutron</span><span class="p">)</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+
+<span class="c1">//Este evento é acionado quando algum jogador entra na sala.</span>
+<span class="k">private</span> <span class="k">void</span> <span class="nf">OnPlayerJoinedRoom</span><span class="p">(</span><span class="n">NeutronRoom</span> <span class="n">room</span><span class="p">,</span> <span class="n">NeutronPlayer</span> <span class="n">player</span><span class="p">,</span> <span class="n">Boolean</span> <span class="n">isMine</span><span class="p">,</span> <span class="n">Neutron</span> <span class="n">instance</span><span class="p">)</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+
+<span class="c1">//Este evento é acionado quando algum jogador entra no canal.</span>
+<span class="k">private</span> <span class="k">void</span> <span class="nf">OnPlayerJoinedChannel</span><span class="p">(</span><span class="n">NeutronChannel</span> <span class="n">channel</span><span class="p">,</span> <span class="n">NeutronPlayer</span> <span class="n">player</span><span class="p">,</span> <span class="n">Boolean</span> <span class="n">isMine</span><span class="p">,</span> <span class="n">Neutron</span> <span class="n">neutron</span><span class="p">)</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+
+<span class="c1">//Este evento é acionado quando algum jogador cria uma sala.</span>
+<span class="k">private</span> <span class="k">void</span> <span class="nf">OnPlayerCreatedRoom</span><span class="p">(</span><span class="n">NeutronRoom</span> <span class="n">room</span><span class="p">,</span> <span class="n">NeutronPlayer</span> <span class="n">player</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">isMine</span><span class="p">,</span> <span class="n">Neutron</span> <span class="n">neutron</span><span class="p">)</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+
+<span class="c1">//Este evento é acionado quando algum jogador troca seu nickname.</span>
+<span class="k">private</span> <span class="k">void</span> <span class="nf">OnPlayerNicknameChanged</span><span class="p">(</span><span class="n">NeutronPlayer</span> <span class="n">player</span><span class="p">,</span> <span class="n">String</span> <span class="n">nickname</span><span class="p">,</span> <span class="n">Boolean</span> <span class="n">isMine</span><span class="p">,</span> <span class="n">Neutron</span> <span class="n">neutron</span><span class="p">)</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+
+<span class="c1">//Este evento é acionado quando algum jogador atualiza suas propriedades.</span>
+<span class="k">private</span> <span class="k">void</span> <span class="nf">OnPlayerPropertiesChanged</span><span class="p">(</span><span class="n">NeutronPlayer</span> <span class="n">player</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">isMine</span><span class="p">,</span> <span class="n">Neutron</span> <span class="n">neutron</span><span class="p">)</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+
+<span class="c1">//Este evento é acionado quando algum jogador envia um pacote personalizado e este pacote é recebido.</span>
+<span class="k">private</span> <span class="k">void</span> <span class="nf">OnPlayerCustomPacketReceived</span><span class="p">(</span><span class="n">NeutronReader</span> <span class="n">reader</span><span class="p">,</span> <span class="n">NeutronPlayer</span> <span class="n">player</span><span class="p">,</span> <span class="n">CustomPacket</span> <span class="n">packet</span><span class="p">,</span> <span class="n">Neutron</span> <span class="n">neutron</span><span class="p">)</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+
+<span class="c1">//Este evento é acionado quando as propriedades da sala atual são alteradas.</span>
+<span class="k">private</span> <span class="k">void</span> <span class="nf">OnRoomPropertiesChanged</span><span class="p">(</span><span class="n">NeutronPlayer</span> <span class="n">player</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">isMine</span><span class="p">,</span> <span class="n">Neutron</span> <span class="n">neutron</span><span class="p">)</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+
+<span class="c1">//Este evento é acionado quando algum pacote apresenta uma falha.</span>
+<span class="k">private</span> <span class="k">void</span> <span class="nf">OnFail</span><span class="p">(</span><span class="n">Packet</span> <span class="n">packet</span><span class="p">,</span> <span class="kt">string</span> <span class="n">message</span><span class="p">,</span> <span class="n">Neutron</span> <span class="n">instance</span><span class="p">)</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p><em>Seu código deve se parecer com isto:</em></p>
 <div class="highlight-C# notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -457,21 +722,23 @@
 13
 14
 15
-16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">neutron</span><span class="p">.</span><span class="n">OnNeutronConnected</span> <span class="p">+=</span> <span class="n">OnNeutronConnected</span><span class="p">;</span>
-<span class="n">neutron</span><span class="p">.</span><span class="n">OnPlayerConnected</span> <span class="p">+=</span> <span class="n">OnPlayerConnected</span><span class="p">;</span>
-
-<span class="c1">//Este evento é acionado quando uma tentativa de conexão retorna seu estado.</span>
-<span class="c1">//isSuccess: Retorna se a tentativa de conexão foi bem sucedida.</span>
-<span class="k">private</span> <span class="k">void</span> <span class="nf">OnNeutronConnected</span><span class="p">(</span><span class="kt">bool</span> <span class="n">isSuccess</span><span class="p">,</span> <span class="n">Neutron</span> <span class="n">neutron</span><span class="p">)</span>
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
 <span class="p">{</span>
-    <span class="c1">//* Faça algo.</span>
+    <span class="n">Neutron</span> <span class="n">neutron</span> <span class="p">=</span> <span class="n">Neutron</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">ClientMode</span><span class="p">.</span><span class="n">Player</span><span class="p">);</span> <span class="c1">// Inicializa a instância.</span>
+    <span class="n">neutron</span><span class="p">.</span><span class="n">OnNeutronConnected</span> <span class="p">+=</span> <span class="n">OnNeutronConnected</span><span class="p">;</span> <span class="c1">//* Registra o evento de conexão.</span>
+    <span class="n">neutron</span><span class="p">.</span><span class="n">Connect</span><span class="p">();</span> <span class="c1">//* Inicia a tentativa de conexão.</span>
+
+    <span class="c1">// Outro exemplo, com autenticação ao lado do servidor.</span>
+
+    <span class="n">neutron</span><span class="p">.</span><span class="n">Connect</span><span class="p">(</span><span class="n">authentication</span><span class="p">:</span> <span class="k">new</span> <span class="n">Authentication</span><span class="p">(</span><span class="s">&quot;user123&quot;</span><span class="p">,</span> <span class="s">&quot;pass123&quot;</span><span class="p">));</span> <span class="c1">//* Inicia a conexão com base em uma autenticação personalizada ao lado do servidor.</span>
+    <span class="c1">// Alternativa:</span>
+    <span class="n">Neutron</span><span class="p">.</span><span class="n">Client</span><span class="p">.</span><span class="n">Connect</span><span class="p">(</span><span class="n">authentication</span><span class="p">:</span> <span class="k">new</span> <span class="n">Authentication</span><span class="p">(</span><span class="s">&quot;user123&quot;</span><span class="p">,</span> <span class="s">&quot;pass123&quot;</span><span class="p">));</span> <span class="c1">//* Inicia a conexão com base em uma autenticação personalizada ao lado do servidor.</span>
 <span class="p">}</span>
 
-<span class="c1">//Este evento é acionado quando algum jogador se conecta ao servidor.</span>
-<span class="c1">//player: retorna o jogador recém conectado.</span>
-<span class="k">private</span> <span class="k">void</span> <span class="nf">OnPlayerConnected</span><span class="p">(</span><span class="n">NeutronPlayer</span> <span class="n">player</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">isMine</span><span class="p">,</span> <span class="n">Neutron</span> <span class="n">neutron</span><span class="p">)</span>
+<span class="k">private</span> <span class="k">void</span> <span class="nf">OnNeutronConnected</span><span class="p">(</span><span class="kt">bool</span> <span class="n">isSuccess</span><span class="p">,</span> <span class="n">Neutron</span> <span class="n">neutron</span><span class="p">)</span>
 <span class="p">{</span>
-
+    <span class="c1">// Faça algo?</span>
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>

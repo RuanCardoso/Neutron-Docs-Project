@@ -87,6 +87,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Começando</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#configurando-o-neutron">Configurando o Neutron</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#conexao-e-eventos">Conexão e Eventos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#matchmaking">Matchmaking</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="rpc.html">Chamadas de Procedimento Remota</a></li>
@@ -723,7 +724,10 @@ para compilar e executar uma seção de código exclusivamente para uma das plat
 14
 15
 16
-17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="n">Neutron</span> <span class="n">neutron</span> <span class="p">=</span> <span class="n">Neutron</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">ClientMode</span><span class="p">.</span><span class="n">Player</span><span class="p">);</span> <span class="c1">// Inicializa a instância.</span>
     <span class="n">neutron</span><span class="p">.</span><span class="n">OnNeutronConnected</span> <span class="p">+=</span> <span class="n">OnNeutronConnected</span><span class="p">;</span> <span class="c1">//* Registra o evento de conexão.</span>
@@ -738,10 +742,104 @@ para compilar e executar uma seção de código exclusivamente para uma das plat
 
 <span class="k">private</span> <span class="k">void</span> <span class="nf">OnNeutronConnected</span><span class="p">(</span><span class="kt">bool</span> <span class="n">isSuccess</span><span class="p">,</span> <span class="n">Neutron</span> <span class="n">neutron</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="c1">// Faça algo?</span>
+   <span class="k">if</span><span class="p">(</span><span class="n">isSuccess</span><span class="p">)</span>
+   <span class="p">{</span>
+      <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&quot;Success Conection (:&quot;</span><span class="p">);</span>
+   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
+<ul class="simple">
+<li><p><em>Inicializando o Neutron Manager(Gerenciador do Neutron).</em></p></li>
+</ul>
+<p><em>Vá para</em> <strong>Neutron-&gt;Settings-&gt;Setup</strong></p>
+<img alt="../_images/setup.png" class="img" src="../_images/setup.png" />
+<p><em>Agora temos o Neutron Manager criado na nossa cena(Scene)</em></p>
+<img alt="../_images/controllers.png" class="img" src="../_images/controllers.png" />
+<dl class="field-list simple">
+<dt class="field-odd">Client</dt>
+<dd class="field-odd"><p><em>Objeto onde deve ser anexado o script de gerenciamento do cliente. Ex: Script de Conexão e Eventos.</em></p>
+</dd>
+<dt class="field-even">Server</dt>
+<dd class="field-even"><p><em>Este objeto tem alguns scripts pré-anexados que devem ser configurados de acordo com seu caso de uso.</em></p>
+</dd>
+<dt class="field-odd">Custom</dt>
+<dd class="field-odd"><p><em>Aqui será anexado o “Custom View” e o “Custom Events”</em></p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><em>“Custom View” é o objeto que será anexado a todos os objetos de rede ao lado do servidor, este objeto pode ser usado para implementar funções customizadas ao lado do servidor.</em></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><em>“Custom Events” é o objeto que será usado para personalizar/gerenciar os eventos ao lado do servidor. Ex: OnAuthenticated</em></p>
+</div>
+<p><em>Server Object:</em></p>
+<img alt="../_images/serverobject.png" class="img" src="../_images/serverobject.png" />
+<ul class="simple">
+<li><p><em>Terminamos :D</em></p></li>
+</ul>
+</div>
+<div class="section" id="matchmaking">
+<h2>Matchmaking<a class="headerlink" href="#matchmaking" title="Permalink to this headline">¶</a></h2>
+<p><em>Os canais não podem ser criados dinamicamente, estes devem ser pré-criados no inspetor.</em></p>
+<ul class="simple">
+<li><p><em>Como criar uma sala?</em></p></li>
+</ul>
+<div class="highlight-C# notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// Crie um dict com as propriedades da sala.</span>
+<span class="kt">var</span> <span class="n">properties</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">object</span><span class="p">&gt;()</span>
+<span class="p">{</span>
+<span class="na">    [&quot;mapa&quot;]</span> <span class="p">=</span> <span class="s">&quot;downtown&quot;</span><span class="p">,</span>
+<span class="na">    [&quot;type&quot;]</span> <span class="p">=</span> <span class="m">1</span>
+<span class="p">};</span>
+
+<span class="c1">// Este metódo inicia a criação da sala, o evento &quot;OnPlayerCreatedRoom&quot; será acionado após a criação ser bem sucedida.</span>
+<span class="n">Neutron</span><span class="p">.</span><span class="n">Client</span><span class="p">.</span><span class="n">CreateRoom</span><span class="p">(</span><span class="k">new</span> <span class="n">NeutronRoom</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">ID</span> <span class="p">=</span> <span class="m">0</span><span class="p">,</span>
+    <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;.Ruan&quot;</span><span class="p">,</span>
+    <span class="n">Password</span> <span class="p">=</span> <span class="s">&quot;Ruan0503&quot;</span><span class="p">,</span>
+    <span class="n">MaxPlayers</span> <span class="p">=</span> <span class="m">100</span><span class="p">,</span>
+    <span class="n">Properties</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">SerializeObject</span><span class="p">(</span><span class="n">properties</span><span class="p">),</span>
+<span class="p">});</span>
+
+<span class="k">private</span> <span class="k">void</span> <span class="nf">OnPlayerCreatedRoom</span><span class="p">(</span><span class="n">NeutronRoom</span> <span class="n">room</span><span class="p">,</span> <span class="n">NeutronPlayer</span> <span class="n">player</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">isMine</span><span class="p">,</span> <span class="n">Neutron</span> <span class="n">neutron</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">isMine</span><span class="p">)</span>
+    <span class="p">{</span>
+       <span class="c1">// Eu Criei a sala, faça algo.</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><em>Você pode especificar o Id, se é 0, um id automático será atribuído.</em></p>
+</div>
 </div>
 </div>
 

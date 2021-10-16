@@ -335,6 +335,73 @@ Conexão e Eventos
 
    private void OnNeutronConnected(bool isSuccess, Neutron neutron)
    {
-       // Faça algo?
+      if(isSuccess)
+      {
+         Debug.Log("Success Conection (:");
+      }
    }
+
+- *Inicializando o Neutron Manager(Gerenciador do Neutron).*
+
+*Vá para* **Neutron->Settings->Setup**
+
+.. image:: /Images/setup.png
+   :class: img
+
+*Agora temos o Neutron Manager criado na nossa cena(Scene)*
+
+.. image:: /Images/controllers.png
+   :class: img
+
+:Client: *Objeto onde deve ser anexado o script de gerenciamento do cliente. Ex: Script de Conexão e Eventos.*
+:Server: *Este objeto tem alguns scripts pré-anexados que devem ser configurados de acordo com seu caso de uso.*
+:Custom: *Aqui será anexado o "Custom View" e o "Custom Events"*
+
+.. note:: *"Custom View" é o objeto que será anexado a todos os objetos de rede ao lado do servidor, este objeto pode ser usado para implementar funções customizadas ao lado do servidor.*
+.. note:: *"Custom Events" é o objeto que será usado para personalizar/gerenciar os eventos ao lado do servidor. Ex: OnAuthenticated*
+
+*Server Object:*
+
+.. image:: /Images/serverobject.png
+   :class: img
+
+- *Terminamos :D*
+
+Matchmaking
+================
+
+*Os canais não podem ser criados dinamicamente, estes devem ser pré-criados no inspetor.*
+
+- *Como criar uma sala?*
+
+.. code-block:: C#
+   :linenos:
+
+   // Crie um dict com as propriedades da sala.
+   var properties = new Dictionary<string, object>()
+   {
+       ["mapa"] = "downtown",
+       ["type"] = 1
+   };
+
+   // Este metódo inicia a criação da sala, o evento "OnPlayerCreatedRoom" será acionado após a criação ser bem sucedida.
+   Neutron.Client.CreateRoom(new NeutronRoom()
+   {
+       ID = 0,
+       Name = ".Ruan",
+       Password = "Ruan0503",
+       MaxPlayers = 100,
+       Properties = JsonConvert.SerializeObject(properties),
+   });
+
+   private void OnPlayerCreatedRoom(NeutronRoom room, NeutronPlayer player, bool isMine, Neutron neutron)
+   {
+       if(isMine)
+       {
+          // Eu Criei a sala, faça algo.
+       }
+   }
+
+.. tip:: *Você pode especificar o Id, se é 0, um id automático será atribuído.*
+
 
